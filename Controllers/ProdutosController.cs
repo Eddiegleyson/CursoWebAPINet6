@@ -1,7 +1,9 @@
 namespace ApiCatologo.Controllers;
 
+using ApiCatologo.DTOs;
 using ApiCatologo.Models;
 using ApiCatologo.Repository;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,22 +12,25 @@ using Microsoft.EntityFrameworkCore;
 public class ProdutosController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
-    public ProdutosController(IUnitOfWork unitOfWork)
+    private readonly IMapper _mapper;
+    public ProdutosController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
     [HttpGet("GetProdutoPorPreco")]
-    public ActionResult<IEnumerable<Produto>> GetProdutoPreco()
+    public ActionResult<IEnumerable<ProdutoDTO>> GetProdutoPreco()
     {
         try
         {
             var produtos = _unitOfWork.ProdutoRepository.GetProdutoPorPreco().ToList();
+            var produtosResultDTO = _mapper.Map<List<ProdutoDTO>>(produtos);
             if (produtos is null)
             {
                 return NotFound("Lista de Produtos POR PREÇO não encontrado");
             }
-            return Ok(produtos);
+            return Ok(produtosResultDTO);
         }
         catch
         {
