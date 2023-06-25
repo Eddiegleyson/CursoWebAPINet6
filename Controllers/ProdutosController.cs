@@ -2,6 +2,7 @@ namespace ApiCatologo.Controllers;
 
 using ApiCatologo.DTOs;
 using ApiCatologo.Models;
+using ApiCatologo.Pagination;
 using ApiCatologo.Repository;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,28 @@ public class ProdutosController : ControllerBase
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+    }
+
+    [HttpGet("GetProdutosToPageSize")]
+    public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosToPageSize([FromQuery] ProdutosParameters produtosParameters)
+    {
+        try
+        {
+            var produtos = _unitOfWork.ProdutoRepository.GetProdutosToPageSize(produtosParameters).ToList();
+            if (produtos is null)
+            {
+                return NotFound("Lista de Produtos nao encontrada.");
+            }
+            else
+            {
+                var produtosResultDTO = _mapper.Map<List<ProdutoDTO>>(produtos).ToList();
+                return Ok(produtosResultDTO);
+            }
+        }
+        catch 
+        {
+             return StatusCode(StatusCodes.Status500InternalServerError, $"ocorreu um problema no sistema");
+        }
     }
 
     [HttpGet("GetProdutoPorPreco")]
