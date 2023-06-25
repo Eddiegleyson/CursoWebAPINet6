@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "fsZ3blZVhQlqM4ToR6/sLOiCKvQxITH1c80UHLAJ4HobOUrp0bLSAr9ONdULEghANgW9zp8a+ZFskUALetmGOQ==",
+  "dgSpecHash": "W2p/7I7O14SZEanB55DDB2381LueFYNjcxoMXcIBQi8ajLmc5sQ6kPQALv53YMaWelLJ7URqkxX0TKAiLYwAJQ==",
   "success": true,
   "projectFilePath": "/Users/edgleysonalves/Documents/TI/project/source/POCs/webApiNet6/ApiCatologo/ApiCatologo.csproj",
   "expectedPackageFiles": [
+    "/Users/edgleysonalves/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/edgleysonalves/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/edgleysonalves/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/edgleysonalves/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/edgleysonalves/.nuget/packages/microsoft.entityframeworkcore/7.0.7/microsoft.entityframeworkcore.7.0.7.nupkg.sha512",
     "/Users/edgleysonalves/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.7/microsoft.entityframeworkcore.abstractions.7.0.7.nupkg.sha512",
     "/Users/edgleysonalves/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.7/microsoft.entityframeworkcore.analyzers.7.0.7.nupkg.sha512",
