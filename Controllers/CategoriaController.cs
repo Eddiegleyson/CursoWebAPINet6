@@ -15,6 +15,24 @@ public class CategoriaController : ControllerBase
         _unitOfWork = unitOfWork;
     }
 
+    [HttpGet("Produtos")]
+    public ActionResult<IEnumerable<Categoria>> GetCategoriaProdutos()
+    {
+        try
+        {
+            var categoria = _unitOfWork.CategoriaRepository.GetCategoriaPorProdutos().ToList();
+            if (categoria == null)
+            {
+                return NotFound("Produtos não encontrados");
+            }
+            return Ok(categoria);
+        }
+        catch 
+        {
+             return StatusCode(StatusCodes.Status500InternalServerError, $"ocorreu um problema no sistam");
+        }
+    }
+
     [HttpGet("ObterCategoriasOrdenadoPorId")]
     public ActionResult<IEnumerable<Categoria>> ObterCategoriasOrdenadoPorId()
     {
