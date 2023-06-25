@@ -34,41 +34,79 @@ public class ProdutosController : ControllerBase
         }
         catch
         {
-           return StatusCode(StatusCodes.Status500InternalServerError, $"ocorreu um problema no sistam");
+            return StatusCode(StatusCodes.Status500InternalServerError, $"ocorreu um problema no sistema");
         }
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Produto>> Get()
+    public ActionResult<IEnumerable<ProdutoDTO>> Get()
     {
-        var produtos = _unitOfWork.ProdutoRepository.Get().AsNoTracking().ToList();
-        if (produtos is null)
+        try
         {
-            return NotFound("Produto não encontrado");
+            var produtos = _unitOfWork.ProdutoRepository.Get().AsNoTracking().ToList();
+            if (produtos is null)
+            {
+                return NotFound("Produto não encontrado");
+            }
+            else
+            {
+                var produtosResultDTO = _mapper.Map<List<ProdutoDTO>>(produtos);
+                return Ok(produtosResultDTO);
+            }
         }
-        return produtos;
+        catch
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, $"ocorreu um problema no sistema");
+        }
     }
 
     [HttpGet("GetById", Name = "ObterProduto")]
-    public ActionResult<Produto> Get(int id)
+    public ActionResult<ProdutoDTO> Get(int id)
     {
-        var produto = _unitOfWork.ProdutoRepository.GetById(p => p.ProdutoId == id);
-        if (produto is null)
+        try
         {
-            return NotFound("Produto não encontardo.");
+            var produto = _unitOfWork.ProdutoRepository.GetById(p => p.ProdutoId == id);
+            if (produto is null)
+            {
+                return NotFound("Produto não encontardo.");
+            }
+            else
+            {
+                var produtosResultDTO = _mapper.Map<ProdutoDTO>(produto);
+                return Ok(produtosResultDTO);
+            }
         }
-        return produto;
+        catch
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Ocorreu um erro no sistema.");
+        }
     }
-
+    
     [HttpPost]
-    public ActionResult Post(Produto produto)
+    public ActionResult Post([FromBody] ProdutoDTO produtoDto)
     {
-        if (produto is null)
+        try
         {
-            return BadRequest("Payload Not Found.");
+            if (produtoDto is null)
+            {
+                return BadRequest("Payload Not Found.");
+            }
+            else
+            {
+                var produto = _mapper.Map<Produto>(produtoDto);
+
+                _unitOfWork.ProdutoRepository.Add(produto);
+                _unitOfWork.Commit();
+
+                var produtosResultDTO = _mapper.Map<ProdutoDTO>(produto);
+
+                return new CreatedAtRouteResult("ObterProduto", new { id = produto.ProdutoId }, produtosResultDTO);
+            }
         }
-        _unitOfWork.ProdutoRepository.Add(produto);
-        _unitOfWork.Commit();
-        return new CreatedAtRouteResult("ObterProduto", new { id = produto.ProdutoId }, produto);
+        catch
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Ocorreu um erro no sistema.");
+        }
+
     }
 }
