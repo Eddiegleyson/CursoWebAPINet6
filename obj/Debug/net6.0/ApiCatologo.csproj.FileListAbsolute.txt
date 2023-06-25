@@ -101,3 +101,5 @@ C:/Users/edigleyson.rocha/source/repos/pocNet6/webpApiNet6/ApiCatologo/bin/Debug
 /Users/edgleysonalves/Documents/TI/project/source/POCs/webApiNet6/ApiCatologo/obj/Debug/net6.0/ApiCatologo.pdb
 /Users/edgleysonalves/Documents/TI/project/source/POCs/webApiNet6/ApiCatologo/obj/Debug/net6.0/ApiCatologo.genruntimeconfig.cache
 /Users/edgleysonalves/Documents/TI/project/source/POCs/webApiNet6/ApiCatologo/obj/Debug/net6.0/ref/ApiCatologo.dll
+/Users/edgleysonalves/Documents/TI/project/source/POCs/webApiNet6/ApiCatologo/bin/Debug/net6.0/AutoMapper.dll
+/Users/edgleysonalves/Documents/TI/project/source/POCs/webApiNet6/ApiCatologo/bin/Debug/net6.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
